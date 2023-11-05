@@ -1,4 +1,4 @@
-import { chai } from "vitest";
+import chai, { Assertion, expect, util } from "chai";
 
 import chaiDom from "chai-dom";
 import chaiString from "chai-string";
@@ -33,3 +33,15 @@ chai.Assertion.addProperty("required", function () {
     "required",
   );
 });
+
+util.addProperty(Assertion.prototype, "called", function () {
+  // @ts-ignore
+  this.assert(
+    // @ts-ignore
+    this._obj.mock.calls.length > 0,
+    "expected #{this} to have been called",
+    "expected #{this} to not have been called",
+  );
+});
+
+export { chai, expect };

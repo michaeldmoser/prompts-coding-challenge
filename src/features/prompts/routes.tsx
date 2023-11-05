@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Prompts from "@/features/prompts/components/Prompts";
+import Prompts from "@/features/prompts/components/prompts";
 
 export default function PromptRoutes() {
   return (

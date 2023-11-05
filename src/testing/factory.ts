@@ -66,9 +66,9 @@ function fetchById(this: FactoryReturn, id: string | number) {
 function createMany(
   this: FactoryReturn,
   count: number = 1,
-  properties: any = {},
+  overrides: any = {},
 ) {
-  return Array(count).fill(null).map(() => this.create(properties));
+  return Array(count).fill(null).map(() => this.create(overrides));
 }
 
 /**

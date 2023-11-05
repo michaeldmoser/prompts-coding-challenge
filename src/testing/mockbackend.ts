@@ -2,7 +2,7 @@ import { afterAll, afterEach, beforeAll } from "vitest";
 import { setupServer } from "msw/node";
 import { rest } from "msw";
 
-import { handlers } from "./msw-handlers";
+import handlers from "./msw-handlers";
 
 const server = setupServer(...handlers);
 
