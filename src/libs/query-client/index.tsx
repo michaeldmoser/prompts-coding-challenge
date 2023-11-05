@@ -1,3 +1,6 @@
+/**
+ * Seup react-query client and expose a prebuilt Provider for use in the app
+ */
 import { PropsWithChildren } from "react";
 import {
   QueryClient,

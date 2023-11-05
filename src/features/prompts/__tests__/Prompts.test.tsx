@@ -164,9 +164,9 @@ describe("Prompt activation", () => {
 
 describe("Prompt language switching", () => {
   const testCases: [PromptLanguages, typeof expectAllEnglishPrompts][] = [
-    ["english" as PromptLanguages, expectAllEnglishPrompts],
+    ["english", expectAllEnglishPrompts],
     [
-      "spanish" as PromptLanguages,
+      "spanish",
       expectAllSpanishPrompts,
     ],
   ];

@@ -1,5 +1,6 @@
 import { Switch } from "@/components/language-selector";
 import { Outlet } from "react-router-dom";
+
 export default function MainLayout() {
   return (
     <div className="flex justify-center items-center h-screen text-center text-2xl">

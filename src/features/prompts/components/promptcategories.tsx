@@ -1,6 +1,10 @@
 import { PropsWithChildren } from "react";
+
+/**
+ * Display the categories as tabs, and allow the user to select a category to filter the list of promp
+ */
 export default function PromptCategories(
-  { categories, active, setCategory }: {
+  { categories, setCategory }: {
     categories: PromptCategory[];
     setCategory: (category: AllCategories) => void;
     active: AllCategories;

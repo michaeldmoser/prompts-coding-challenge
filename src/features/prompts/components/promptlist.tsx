@@ -1,9 +1,9 @@
-import { useCallback } from "react";
 import cx from "@/utils/cx";
 import { CheckIcon, PlusIcon } from "@radix-ui/react-icons";
 
 /**
- * Displays a list of passed in Prompts defaulting to english
+ * Displays a list of passed in Prompts defaulting to english. Allows the user
+ * to activate or deactivate a prompt.
  */
 export default function PromptList(
   {
@@ -27,7 +27,8 @@ export default function PromptList(
         const isActive = active === prompt.id;
         const addRemovePrompt = isActive ? "Deactivate" : "Activate";
         const title = `${addRemovePrompt} prompt "${content}"`;
-        const onClick = () => {
+
+        const toggleActive = () => {
           const fn = isActive ? onDeactivate : onActivate;
           fn(prompt.id);
         };
@@ -38,7 +39,7 @@ export default function PromptList(
             <button
               aria-label={title}
               title={title}
-              onClick={onClick}
+              onClick={toggleActive}
               className={cx(
                 "ml-2 text-gray-500 hover:text-blue-600 outline outline-2 rounded-full",
                 isActive && "text-green-600 outline-green-600",
