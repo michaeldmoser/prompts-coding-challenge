@@ -4,6 +4,7 @@ import { useGetPromptsQuery } from "../api";
 import Dialog from "@/components/dialog";
 import PromptCategories from "./promptcategories";
 import { categories } from "@/backend/categories";
+import { useSelectedLanguage } from "@/components/language-selector";
 
 export default function Prompts() {
   const {
@@ -13,6 +14,7 @@ export default function Prompts() {
     activePrompt,
     activatePrompt,
     deactivatePrompt,
+    language,
   } = usePrompts();
 
   return (
@@ -23,6 +25,7 @@ export default function Prompts() {
         onDeactivate={deactivatePrompt}
         onActivate={activatePrompt}
         active={activePrompt}
+        language={language}
       />
     </Dialog>
   );
@@ -35,6 +38,7 @@ function usePrompts() {
   const { data: prompts } = useGetPromptsQuery();
 
   return {
+    language: useSelectedLanguage(),
     ...usePromptFiltering(prompts ?? []),
     ...usePromptActivation(),
   };

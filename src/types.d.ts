@@ -25,3 +25,5 @@ type PromptType = {
 };
 
 type PromptList = PromptType[];
+
+type Languages = "english" | "spanish";

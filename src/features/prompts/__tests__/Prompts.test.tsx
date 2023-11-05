@@ -3,7 +3,7 @@ import { factory } from "@/testing/factory";
 import { Prompts } from "..";
 import { Air, Community } from "@/backend/categories";
 import { waitFor } from "@testing-library/react";
-import { before } from "node:test";
+import { Provider } from "@/components/language-selector";
 
 describe("Prompts", () => {
   it("should list all Prompts", async () => {
@@ -162,12 +162,47 @@ describe("Prompt activation", () => {
   });
 });
 
+describe("Prompt language switching", () => {
+  it.each([
+    ["english", expectAllEnglishPrompts],
+    [
+      "spanish",
+      expectAllSpanishPrompts,
+    ],
+  ])(
+    "should display prompts in %s",
+    async (language, assertExpectation) => {
+      const prompts = factory.prompts.createMany(10) as unknown as PromptType[];
+
+      const { getByRole, findAllByRole, userEvent } = render(
+        <Provider value={language as Languages}>
+          <Prompts />
+        </Provider>,
+      );
+
+      await userEvent.click(getByRole("button", { name: "Prompts" }));
+
+      assertExpectation(prompts, await findAllByRole("listitem"));
+    },
+  );
+});
+
+function expectAllPrompts(expected: string[], actual: HTMLElement[]) {
+  const actualPrompts = actual.map((prompt) => prompt.textContent);
+
+  expect(actualPrompts).to.have.members(expected);
+}
+
 function expectAllEnglishPrompts(
   expected: PromptType[],
   actual: HTMLElement[],
 ) {
-  const expectedPrompts = expected.map((prompt) => prompt.prompt.english);
-  const actualPrompts = actual.map((prompt) => prompt.textContent);
+  expectAllPrompts(expected.map((prompt) => prompt.prompt.english), actual);
+}
 
-  expect(actualPrompts).to.have.members(expectedPrompts);
+function expectAllSpanishPrompts(
+  expected: PromptType[],
+  actual: HTMLElement[],
+) {
+  expectAllPrompts(expected.map((prompt) => prompt.prompt.spanish), actual);
 }

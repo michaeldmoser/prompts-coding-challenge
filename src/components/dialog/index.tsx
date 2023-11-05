@@ -24,19 +24,17 @@ export default function Dialog({ children }: PropsWithChildren<{}>) {
           <Title asChild>
             <div className="text-mauve12 m-0 grid grid-cols-2">
               <h2 className="text-4xl text-left">Prompts</h2>
-              <Close asChild>
-                <div className="text-right">
-                  <button
-                    className="text-violet11 hover:bg-violet4 focus:shadow-violet7 top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full  outline outline-violet11"
-                    aria-label="Close"
-                  >
-                    <Cross2Icon height={32} width={32} />
-                  </button>
-                </div>
-              </Close>
             </div>
           </Title>
           {children}
+          <Close asChild>
+            <button
+              className="text-violet-950 text-2xl hover:bg-violet-400 focus:shadow-violet7 absolute top-[10px] right-[10px] inline-flex appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] p-1 focus:outline-none"
+              aria-label="Close"
+            >
+              <Cross2Icon className="w-[1em] h-[1em]" />
+            </button>
+          </Close>
         </Content>
       </Portal>
     </Root>
