@@ -163,19 +163,20 @@ describe("Prompt activation", () => {
 });
 
 describe("Prompt language switching", () => {
-  it.each([
-    ["english", expectAllEnglishPrompts],
+  const testCases: [PromptLanguages, typeof expectAllEnglishPrompts][] = [
+    ["english" as PromptLanguages, expectAllEnglishPrompts],
     [
-      "spanish",
+      "spanish" as PromptLanguages,
       expectAllSpanishPrompts,
     ],
-  ])(
+  ];
+  it.each(testCases)(
     "should display prompts in %s",
     async (language, assertExpectation) => {
       const prompts = factory.prompts.createMany(10) as unknown as PromptType[];
 
       const { getByRole, findAllByRole, userEvent } = render(
-        <Provider value={language as Languages}>
+        <Provider language={language}>
           <Prompts />
         </Provider>,
       );

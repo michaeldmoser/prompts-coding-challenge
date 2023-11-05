@@ -1,8 +1,8 @@
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 
 type LanguageSelectorContextType = {
-  language: "english" | "spanish";
-  setLanguage: (language: "english" | "spanish") => void;
+  language: PromptLanguages;
+  setLanguage: (language: PromptLanguages) => void;
 };
 
 const LanguageSelectorContext = createContext<LanguageSelectorContextType>({
@@ -10,22 +10,33 @@ const LanguageSelectorContext = createContext<LanguageSelectorContextType>({
   setLanguage: (_) => void (0),
 });
 
+/**
+ * Returns the currently selected language
+ */
 export function useSelectedLanguage() {
   return useContext(LanguageSelectorContext).language;
 }
 
+/**
+ * Returns a function to set the language
+ */
 export function useSetLanguage() {
   return useContext(LanguageSelectorContext).setLanguage;
 }
 
+/**
+ * Context provider for managing the selected language
+ */
 export function Provider(
-  { children, value = "english" }: PropsWithChildren<
-    { value?: "english" | "spanish" }
+  { children, language = "english" }: PropsWithChildren<
+    { language?: PromptLanguages }
   >,
 ) {
-  const [language, setLanguage] = useState<"english" | "spanish">(value);
+  const [currentLanguage, setLanguage] = useState<PromptLanguages>(language);
   return (
-    <LanguageSelectorContext.Provider value={{ language, setLanguage }}>
+    <LanguageSelectorContext.Provider
+      value={{ language: currentLanguage, setLanguage }}
+    >
       {children}
     </LanguageSelectorContext.Provider>
   );

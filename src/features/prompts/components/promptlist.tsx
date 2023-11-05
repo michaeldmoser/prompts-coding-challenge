@@ -14,7 +14,7 @@ export default function PromptList(
     active,
   }: {
     prompts: PromptList;
-    language?: "english" | "spanish";
+    language?: PromptLanguages;
     onActivate: (promptId: number) => void;
     onDeactivate: (promptId: number) => void;
     active?: number | null;
